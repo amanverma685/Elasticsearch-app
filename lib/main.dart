@@ -1,3 +1,4 @@
+import 'package:elasticsearch_project/PDF_Screens/pdf_creator_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'filePicker.dart';
@@ -49,6 +50,14 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
                 "Click On the Floating Action Button to navigate to Your Destination"),
             Text("This is Demo Version"),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PDFCreator()),
+                  );
+                },
+                child: Text("PDF Creator"))
           ],
         ),
       ),
@@ -56,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
