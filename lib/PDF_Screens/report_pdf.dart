@@ -42,19 +42,18 @@ reportView(context, heading, text, pdfName) async {
             child: Text('Page ${context.pageNumber} of ${context.pagesCount}',
                 style: Theme.of(context)
                     .defaultTextStyle
-                    .copyWith(color: PdfColors.grey)));
+                    .copyWith(color: PdfColors.black)));
       },
       build: (Context context) => <Widget>[
         Header(
-            level: 0,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(heading, textScaleFactor: 2),
-                  PdfLogo()
-                ])),
+          level: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[Text(heading, textScaleFactor: 2), PdfLogo()],
+          ),
+        ),
         Header(level: 1, text: heading, outlineStyle: PdfOutlineStyle.normal),
-        Paragraph(text: text, style: TextStyle(font: ttf))
+        Paragraph(text: text, style: TextStyle(font: ttf, fontSize: 20))
       ],
     ),
   );
@@ -66,7 +65,7 @@ reportView(context, heading, text, pdfName) async {
   await file.writeAsBytes(pdf.save());
   material.Navigator.of(context).push(
     material.MaterialPageRoute(
-      builder: (_) => PdfViewerPage(path: path),
+      builder: (_) => PdfViewerPage(path: path, pdfName: pdfName, pdf: pdf),
     ),
   );
 }

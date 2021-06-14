@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_tts/flutter_tts.dart';
 
 class FilePickerElasticSearch extends StatefulWidget {
   const FilePickerElasticSearch({Key key}) : super(key: key);
@@ -33,6 +34,12 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
     }
   }
 
+  void speak() async {
+    final flutterTts = FlutterTts();
+    await flutterTts.speak(questionContext);
+  }
+
+  bool isEnabled = false;
   String inputQuery = " ";
   final _formKey = GlobalKey<FormState>();
   String questionContext = " ";
@@ -59,6 +66,10 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              IconButton(
+                icon: Icon(Icons.speaker),
+                onPressed: isEnabled ? speak : null,
+              ),
               ElevatedButton(
                 child: Text(buttonData),
                 onPressed: filePickerPickFile,
@@ -113,7 +124,9 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
                               if (questionContext == null)
                                 questionContext = "No data Found";
                               print(questionContext);
-                              setState(() {});
+                              setState(() {
+                                isEnabled = true;
+                              });
                             }
                           },
                           // It returns true if the form is valid, otherwise returns false
