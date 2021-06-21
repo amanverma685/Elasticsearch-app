@@ -22,7 +22,6 @@ class PdfViewerPage extends StatelessWidget {
                 print(pdf);
                 print(path);
                 final File file = File(path);
-                final bytes = pdf.save();
                 await file.writeAsBytes(pdf.save());
                 print("File Saved");
                 ScaffoldMessenger.of(context).showSnackBar(

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:elasticsearch_project/PDF_Screens/pdf_viewer_page.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:path_provider/path_provider.dart';
@@ -12,9 +11,9 @@ reportView(context, heading, text, pdfName) async {
   final ttf = Font.ttf(font);
   pdf.addPage(
     MultiPage(
-      // pageFormat:
-      //     PdfPageFormat.letter.copyWith(marginBottom: 1.5 * PdfPageFormat.cm),
-      pageFormat: PdfPageFormat.a4,
+      pageFormat:
+          PdfPageFormat.letter.copyWith(marginBottom: 1.5 * PdfPageFormat.cm),
+      // pageFormat: PdfPageFormat.a4,
       crossAxisAlignment: CrossAxisAlignment.start,
       header: (Context context) {
         if (context.pageNumber == 1) {
@@ -61,8 +60,6 @@ reportView(context, heading, text, pdfName) async {
 
   final String dir = (await getApplicationDocumentsDirectory()).path;
   final String path = '$dir/' + pdfName;
-  final File file = File(path);
-  await file.writeAsBytes(pdf.save());
   material.Navigator.of(context).push(
     material.MaterialPageRoute(
       builder: (_) => PdfViewerPage(path: path, pdfName: pdfName, pdf: pdf),

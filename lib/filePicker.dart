@@ -34,9 +34,14 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
     }
   }
 
+  final flutterTts = FlutterTts();
+
   void speak() async {
-    final flutterTts = FlutterTts();
     await flutterTts.speak(questionContext);
+  }
+
+  void stopSpeak() async {
+    await flutterTts.stop();
   }
 
   bool isEnabled = false;
@@ -66,9 +71,31 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                icon: Icon(Icons.speaker),
-                onPressed: isEnabled ? speak : null,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Speak"),
+                  IconButton(
+                    icon: Icon(
+                      Icons.speaker,
+                      color: Colors.green,
+                    ),
+                    onPressed: isEnabled ? speak : null,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Stop"),
+                  IconButton(
+                    icon: Icon(
+                      Icons.stop_circle_rounded,
+                      color: Colors.red,
+                    ),
+                    onPressed: stopSpeak,
+                  ),
+                ],
               ),
               ElevatedButton(
                 child: Text(buttonData),
