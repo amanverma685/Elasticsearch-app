@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.red[900],
+        backgroundColor: Colors.red[600],
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
@@ -55,16 +55,35 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: Container(
-        color: Colors.red,
+        color: Colors.red[500],
         child: Column(
           children: <Widget>[
             Expanded(
-              child: Container(),
               flex: 6,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.red[500],
+                    ),
+                    borderRadius:
+                        BorderRadius.only(bottomLeft: Radius.circular(50))),
+                child: Image.asset('assets/botpng.png'),
+              ),
             ),
             Expanded(
-              child: Container(),
               flex: 4,
+              child: Container(
+                color: Colors.white,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red[500],
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(50),
+                    ),
+                  ),
+                ),
+              ),
             )
           ],
         ),
