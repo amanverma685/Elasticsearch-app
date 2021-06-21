@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Smart Snippet',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -42,17 +43,36 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        foregroundColor: Colors.red,
+        backgroundColor: Colors.red[900],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              icon: Icon(Icons.person),
+              onPressed: () {},
+            ),
+          )
+        ],
       ),
-      body: Center(
+      body: Container(
+        color: Colors.red,
         child: Column(
-          children: <Widget>[],
+          children: <Widget>[
+            Expanded(
+              child: Container(),
+              flex: 6,
+            ),
+            Expanded(
+              child: Container(),
+              flex: 4,
+            )
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: Icon(Icons.question_answer),
       ),
     );
   }
