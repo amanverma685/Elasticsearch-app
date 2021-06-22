@@ -13,7 +13,22 @@ class _ExampleHomePageState extends State<ExampleHomePage>
     "assets/welcome1.jpg",
     "assets/welcome1.jpg",
   ];
-  List<Color> colourCard = [Colors.green, Colors.amberAccent, Colors.red];
+  List<Color> colourCard = [Colors.white, Colors.white, Colors.white];
+  AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: Duration(seconds: 3),
+      vsync: this,
+    );
+    _animationController.forward();
+    _animationController.repeat(reverse: true);
+    _animationController.addListener(() {
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +50,30 @@ class _ExampleHomePageState extends State<ExampleHomePage>
             minWidth: MediaQuery.of(context).size.width * 0.8,
             minHeight: MediaQuery.of(context).size.height * 0.8,
             cardBuilder: (context, index) => Card(
+              shadowColor: Colors.red,
+              borderOnForeground: true,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(50),
               ),
               child: Container(
-                color: colourCard[index],
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.deepPurple,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.orange,
+                        offset: const Offset(
+                          5.0,
+                          5.0,
+                        ),
+                        blurRadius: 10.0,
+                        spreadRadius: 2.0,
+                      ),
+                    ]),
                 child: Column(
                   children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        child: Container(),
-                      ),
-                    ),
+                    Expanded(flex: 1, child: Container()),
                     Expanded(
                       flex: 1,
                       child: Container(),
