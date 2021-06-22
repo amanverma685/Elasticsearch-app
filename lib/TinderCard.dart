@@ -6,29 +6,13 @@ class ExampleHomePage extends StatefulWidget {
   _ExampleHomePageState createState() => _ExampleHomePageState();
 }
 
-class _ExampleHomePageState extends State<ExampleHomePage>
-    with TickerProviderStateMixin {
+class _ExampleHomePageState extends State<ExampleHomePage> {
   List<String> welcomeImages = [
     "assets/welcome1.jpg",
     "assets/welcome1.jpg",
     "assets/welcome1.jpg",
   ];
   List<Color> colourCard = [Colors.white, Colors.white, Colors.white];
-  AnimationController _animationController;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      duration: Duration(seconds: 3),
-      vsync: this,
-    );
-    _animationController.forward();
-    _animationController.repeat(reverse: true);
-    _animationController.addListener(() {
-      setState(() {});
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +47,7 @@ class _ExampleHomePageState extends State<ExampleHomePage>
                     boxShadow: [
                       BoxShadow(
                         color: Colors.orange,
-                        offset: const Offset(
+                        offset: Offset(
                           5.0,
                           5.0,
                         ),
