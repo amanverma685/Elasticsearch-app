@@ -2,6 +2,7 @@
 
 import 'package:elasticsearch_project/TeamScreen.dart';
 import 'package:elasticsearch_project/TinderCard.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'FilePick_and_Upload.dart';
@@ -99,44 +100,56 @@ class _MyHomePageState extends State<MyHomePage>
                   child: Column(
                     children: [
                       Expanded(
-                        flex: 3,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 15.0),
-                          child: Row(
-                            children: <Widget>[
-                              Text(
-                                'Smart',
-                                style: TextStyle(
-                                    fontFamily: 'Lato',
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.12),
-                              ),
-                              DefaultTextStyle(
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.width * .15,
-                                    color: Colors.black,
-                                    fontFamily: 'Lobster'),
-                                child: AnimatedTextKit(
-                                    repeatForever: true,
-                                    animatedTexts: [
-                                      RotateAnimatedText(' Snippet'),
-                                      RotateAnimatedText(' Translator'),
-                                      RotateAnimatedText(' Robot'),
-                                    ]),
-                              ),
-                            ],
+                        flex: 1,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  'Smart',
+                                  style: TextStyle(
+                                      fontFamily: 'Lato',
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.12),
+                                ),
+                                DefaultTextStyle(
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              .15,
+                                      color: Colors.black,
+                                      fontFamily: 'Lobster'),
+                                  child: AnimatedTextKit(
+                                      repeatForever: true,
+                                      animatedTexts: [
+                                        RotateAnimatedText(' Snippet'),
+                                        RotateAnimatedText(' Translator'),
+                                        RotateAnimatedText(' Robot'),
+                                      ]),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                       Expanded(
+                        flex: 2,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
                               padding: EdgeInsets.all(10.0),
                               child: ElevatedButton(
                                 style: ButtonStyle(
+                                  foregroundColor:
+                                      MaterialStateProperty.all(Colors.black),
+                                  overlayColor: MaterialStateProperty.all(
+                                      Colors.blueGrey),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                           borderRadius:
@@ -153,21 +166,28 @@ class _MyHomePageState extends State<MyHomePage>
                                 },
                               ),
                             ),
+                            Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20))),
+                                ),
+                                child: Text("Click Here "),
+                                onPressed: _incrementCounter,
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  color: Colors.white),
+                  color: Colors.deepPurple),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: "Question Answer",
-        elevation: 5,
-        child: Icon(Icons.question_answer),
       ),
     );
   }
