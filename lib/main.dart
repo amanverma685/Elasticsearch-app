@@ -1,7 +1,8 @@
-import 'package:elasticsearch_project/PDF_Screens/pdf_creator_screen.dart';
+// import 'package:elasticsearch_project/PDF_Screens/pdf_creator_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'filePicker.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'FilePick_and_Upload.dart';
+import 'AdobeBertModel.dart';
 
 void main() {
   runApp(MyApp());
@@ -43,10 +44,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.red[600],
+        backgroundColor: Colors.grey,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: EdgeInsets.only(right: 8.0),
             child: IconButton(
               icon: Icon(Icons.person),
               onPressed: () {},
@@ -55,42 +56,34 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: Container(
-        color: Colors.red[500],
+        color: Colors.deepPurple,
         child: Column(
-          children: <Widget>[
+          children: [
             Expanded(
-              flex: 6,
+                child: Container(
+                    child: Container(
+              child: Image.asset('assets/botpng.png'),
+            ))),
+            Expanded(
               child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      color: Colors.red[500],
-                    ),
-                    borderRadius:
-                        BorderRadius.only(bottomLeft: Radius.circular(50))),
-                child: Image.asset('assets/botpng.png'),
+                child: Container(
+                    // child: ElevatedButton(
+                    //   child: Text("click Here"),
+                    //   onPressed: () async {
+                    //     // String answerData = await requestBertModel();
+                    //     print(answerData);
+                    //   },
+                    // ),
+                    color: Colors.white),
               ),
             ),
-            Expanded(
-              flex: 4,
-              child: Container(
-                color: Colors.white,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.red[500],
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(50),
-                    ),
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        tooltip: "Question Answer",
+        elevation: 5,
         child: Icon(Icons.question_answer),
       ),
     );

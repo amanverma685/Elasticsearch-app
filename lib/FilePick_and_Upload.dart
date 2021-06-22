@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'AdobeBertModel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -49,7 +49,7 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
   final _formKey = GlobalKey<FormState>();
   String questionContext = " ";
   String buttonData = "Upload PDF to Index on ElasticSearch";
-
+  String answerData = "";
   void _clearCachedFiles() {
     FilePicker.platform.clearTemporaryFiles().then((result) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -148,9 +148,13 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
                                   body: jsonEncode(body), headers: headers);
                               var jsonResponse = json.decode(response.body);
                               questionContext = jsonResponse['context1'];
+                              answerData = await requestBertModel(
+                                  questionContext, inputQuery);
+                              print("This is the answer");
+                              print(answerData);
+
                               if (questionContext == null)
                                 questionContext = "No data Found";
-                              print(questionContext);
                               setState(() {
                                 isEnabled = true;
                               });
