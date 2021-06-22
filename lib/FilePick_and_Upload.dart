@@ -49,7 +49,7 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
   final _formKey = GlobalKey<FormState>();
   String questionContext = " ";
   String buttonData = "Upload PDF to Index on ElasticSearch";
-  String answerData = "";
+  String answerData = " ";
   void _clearCachedFiles() {
     FilePicker.platform.clearTemporaryFiles().then((result) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -148,6 +148,10 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
                                   body: jsonEncode(body), headers: headers);
                               var jsonResponse = json.decode(response.body);
                               questionContext = jsonResponse['context1'];
+                              //Bert Model  Is Called
+                              questionContext =
+                                  'A younger version of me and a younger version of this Youtube channel started this series called Startup Funding Explained. We went through a theoretical companys story while analyzing how the cap table evolved through various rounds of funding. Make sure to watch Parts 1 through 3 if you want to get a grip on that.But if you are only in for the good stuff, thats OK. This article will analyze a few exit scenarios for that theoretical company and how much money everyone does, or does not make.';
+                              inputQuery = 'what parts should I watch';
                               answerData = await requestBertModel(
                                   questionContext, inputQuery);
                               print("This is the answer");
@@ -176,7 +180,7 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
                     Padding(
                       padding: EdgeInsets.only(left: 18.0),
                       child: Text(
-                        questionContext,
+                        answerData,
                         style: TextStyle(fontSize: 20),
                       ),
                     ),

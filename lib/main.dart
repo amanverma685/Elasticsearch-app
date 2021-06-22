@@ -1,8 +1,10 @@
 // import 'package:elasticsearch_project/PDF_Screens/pdf_creator_screen.dart';
+
+import 'package:elasticsearch_project/TeamScreen.dart';
+import 'package:elasticsearch_project/TinderCard.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'FilePick_and_Upload.dart';
-import 'AdobeBertModel.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,7 +33,24 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+  AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: Duration(seconds: 3),
+      vsync: this,
+    );
+    _animationController.forward();
+    _animationController.repeat(reverse: true);
+    _animationController.addListener(() {
+      setState(() {});
+    });
+  }
+
   void _incrementCounter() {
     Navigator.push(
       context,
@@ -44,13 +63,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.deepPurple,
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 8.0),
+            padding: EdgeInsets.all(8.0),
             child: IconButton(
               icon: Icon(Icons.person),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TeamScreen()),
+                );
+              },
             ),
           )
         ],
@@ -58,24 +82,83 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         color: Colors.deepPurple,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-                child: Container(
-                    child: Container(
-              child: Image.asset('assets/botpng.png'),
-            ))),
+              flex: 2,
+              child: Container(
+                margin: EdgeInsets.only(top: _animationController.value * 60),
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Image.asset('assets/botpng.png'),
+                ),
+              ),
+            ),
             Expanded(
               child: Container(
-                child: Container(
-                    // child: ElevatedButton(
-                    //   child: Text("click Here"),
-                    //   onPressed: () async {
-                    //     // String answerData = await requestBertModel();
-                    //     print(answerData);
-                    //   },
-                    // ),
-                    color: Colors.white),
-              ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15.0),
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                'Smart',
+                                style: TextStyle(
+                                    fontFamily: 'Lato',
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.12),
+                              ),
+                              DefaultTextStyle(
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width * .15,
+                                    color: Colors.black,
+                                    fontFamily: 'Lobster'),
+                                child: AnimatedTextKit(
+                                    repeatForever: true,
+                                    animatedTexts: [
+                                      RotateAnimatedText(' Snippet'),
+                                      RotateAnimatedText(' Translator'),
+                                      RotateAnimatedText(' Robot'),
+                                    ]),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20))),
+                                ),
+                                child: Text("Click Here"),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ExampleHomePage(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  color: Colors.white),
             ),
           ],
         ),
