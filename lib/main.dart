@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage>
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(30)),
                           child: Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Row(
@@ -115,13 +115,13 @@ class _MyHomePageState extends State<MyHomePage>
                                       fontFamily: 'Lato',
                                       fontSize:
                                           MediaQuery.of(context).size.width *
-                                              0.12),
+                                              0.10),
                                 ),
                                 DefaultTextStyle(
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.width *
-                                              .15,
+                                              .12,
                                       color: Colors.black,
                                       fontFamily: 'Lobster'),
                                   child: AnimatedTextKit(
@@ -146,10 +146,12 @@ class _MyHomePageState extends State<MyHomePage>
                               padding: EdgeInsets.all(10.0),
                               child: ElevatedButton(
                                 style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.white),
                                   foregroundColor:
                                       MaterialStateProperty.all(Colors.black),
                                   overlayColor: MaterialStateProperty.all(
-                                      Colors.blueGrey),
+                                      Colors.deepPurple),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                           borderRadius:
@@ -170,6 +172,13 @@ class _MyHomePageState extends State<MyHomePage>
                               padding: EdgeInsets.all(10.0),
                               child: ElevatedButton(
                                 style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.white),
+                                  foregroundColor:
+                                      MaterialStateProperty.all(Colors.black),
+                                  overlayColor: MaterialStateProperty.all(
+                                    Colors.deepPurple,
+                                  ),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                           borderRadius:

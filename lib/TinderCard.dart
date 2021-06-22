@@ -35,6 +35,9 @@ class _ExampleHomePageState extends State<ExampleHomePage>
             minWidth: MediaQuery.of(context).size.width * 0.8,
             minHeight: MediaQuery.of(context).size.height * 0.8,
             cardBuilder: (context, index) => Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
               child: Container(
                 color: colourCard[index],
                 child: Column(
