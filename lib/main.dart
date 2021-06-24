@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
+  bool modHud = false;
   @override
   void initState() {
     super.initState();
