@@ -1,5 +1,6 @@
 // import 'package:elasticsearch_project/PDF_Screens/pdf_creator_screen.dart';
 
+import 'package:elasticsearch_project/Screens/Index_and_Ask.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -161,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage>
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => AdobeInternTeam(),
+                                      builder: (context) => IndexAndAsk(),
                                     ),
                                   );
                                 },

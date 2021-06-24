@@ -13,7 +13,7 @@ class _AdobeInternTeamState extends State<AdobeInternTeam> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text("Adobe Intern"),
+        title: Text("Team"),
       ),
       body: Container(
         color: Colors.white,
@@ -23,7 +23,7 @@ class _AdobeInternTeamState extends State<AdobeInternTeam> {
             Expanded(
               flex: 4,
               child: Padding(
-                padding: const EdgeInsets.all(6.0),
+                padding: EdgeInsets.all(6.0),
                 child: Card(
                   shadowColor: Colors.blue,
                   elevation: 6,
@@ -78,7 +78,7 @@ class _AdobeInternTeamState extends State<AdobeInternTeam> {
             Expanded(
               flex: 4,
               child: Padding(
-                padding: const EdgeInsets.all(6.0),
+                padding: EdgeInsets.all(6.0),
                 child: Card(
                   shadowColor: Colors.blue,
                   elevation: 6,
@@ -134,7 +134,7 @@ class _AdobeInternTeamState extends State<AdobeInternTeam> {
             Expanded(
               flex: 4,
               child: Padding(
-                padding: const EdgeInsets.all(6.0),
+                padding: EdgeInsets.all(6.0),
                 child: Card(
                   shadowColor: Colors.blue,
                   elevation: 6,
