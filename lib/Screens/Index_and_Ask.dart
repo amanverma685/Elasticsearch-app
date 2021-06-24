@@ -27,8 +27,9 @@ class _IndexAndAskState extends State<IndexAndAsk> {
       appBar: AppBar(
         title: Text(
           "Find your answers",
-          style: TextStyle(fontFamily: 'Lobster', fontSize: 20),
+          style: TextStyle(fontFamily: 'Lobster', fontSize: 30),
         ),
+        centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),
       body: Container(
@@ -39,69 +40,94 @@ class _IndexAndAskState extends State<IndexAndAsk> {
             ),
             Expanded(
               flex: 6,
-              child: Form(
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      key: _formFieldKey,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
+              child: SingleChildScrollView(
+                child: Container(
+                  child: Form(
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          "Please Enter your paragraph",
+                          style: TextStyle(fontSize: 24),
                         ),
-                      ),
-                      controller: contextController,
-                      maxLength: null,
-                      maxLines: null,
-                      keyboardType: TextInputType.multiline,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some Context to Index';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.02,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
+                        SizedBox(
+                          height: 10,
                         ),
-                      ),
-                      controller: questionController,
-                      maxLength: null,
-                      maxLines: null,
-                      keyboardType: TextInputType.multiline,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some Context to Index';
-                        }
-                        return null;
-                      },
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        if (_formFieldKey.currentState.validate()) {
-                          questionContext = questionController.text;
-                          questionQuery = contextController.text;
-                          final snackBar = SnackBar(
-                              backgroundColor: Colors.deepPurple,
-                              content: Text(
-                                  'Getting your answers... Please Wait...'));
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          progressHUD = true;
-                          setState(() {});
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            key: _formFieldKey,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            controller: contextController,
+                            maxLength: null,
+                            maxLines: null,
+                            keyboardType: TextInputType.multiline,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please enter some Context to Index';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.02,
+                        ),
+                        Text(
+                          "Please Enter your Question",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            controller: questionController,
+                            maxLength: null,
+                            maxLines: null,
+                            keyboardType: TextInputType.multiline,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please enter some Context to Index';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
+                            if (_formFieldKey.currentState.validate()) {
+                              questionContext = questionController.text;
+                              questionQuery = contextController.text;
+                              final snackBar = SnackBar(
+                                  backgroundColor: Colors.deepPurple,
+                                  content: Text(
+                                      'Getting your answers... Please Wait...'));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                              progressHUD = true;
+                              setState(() {});
 
-                          answerText = await requestBertModel(
-                              questionContext, questionQuery);
-                        }
-                        progressHUD = false;
-                        setState(() {});
-                      },
-                      child: Text('Submit Context'),
+                              answerText = await requestBertModel(
+                                  questionContext, questionQuery);
+                            }
+                            progressHUD = false;
+                            setState(() {});
+                          },
+                          child: Text('Submit Context and question..'),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -111,29 +137,29 @@ class _IndexAndAskState extends State<IndexAndAsk> {
             ),
             Expanded(
               flex: 4,
-              child: SingleChildScrollView(
-                child: Container(
-                  child: Column(
-                    children: [
-                      Text(
-                        "Answer",
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: ModalProgressHUD(
-                          inAsyncCall: progressHUD,
+              child: ModalProgressHUD(
+                inAsyncCall: progressHUD,
+                child: SingleChildScrollView(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Text(
+                          "Answer",
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
                           child: Text(
                             answerText,
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
