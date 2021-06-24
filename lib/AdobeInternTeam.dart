@@ -10,16 +10,20 @@ class AdobeInternTeam extends StatefulWidget {
 class _AdobeInternTeamState extends State<AdobeInternTeam> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+        title: Text("Adobe Intern"),
+      ),
+      body: Container(
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              flex: 1,
+              flex: 4,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(6.0),
                 child: Card(
                   shadowColor: Colors.blue,
                   elevation: 6,
@@ -72,9 +76,9 @@ class _AdobeInternTeamState extends State<AdobeInternTeam> {
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 4,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(6.0),
                 child: Card(
                   shadowColor: Colors.blue,
                   elevation: 6,
@@ -128,9 +132,9 @@ class _AdobeInternTeamState extends State<AdobeInternTeam> {
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 4,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(6.0),
                 child: Card(
                   shadowColor: Colors.blue,
                   elevation: 6,
