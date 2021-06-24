@@ -1,10 +1,9 @@
 // import 'package:elasticsearch_project/PDF_Screens/pdf_creator_screen.dart';
 
-import 'package:elasticsearch_project/TeamScreen.dart';
-import 'package:elasticsearch_project/TinderCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'AdobeInternTeam.dart';
 import 'FilePick_and_Upload.dart';
 
 void main() {
@@ -73,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage>
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TeamScreen()),
+                  MaterialPageRoute(builder: (context) => AdobeInternTeam()),
                 );
               },
             ),
@@ -162,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage>
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => ExampleHomePage(),
+                                      builder: (context) => AdobeInternTeam(),
                                     ),
                                   );
                                 },
