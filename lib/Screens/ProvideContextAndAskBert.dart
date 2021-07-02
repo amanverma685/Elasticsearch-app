@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 import '../AdobeBertModel.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -12,6 +13,16 @@ class IndexAndAsk extends StatefulWidget {
 }
 
 class _IndexAndAskState extends State<IndexAndAsk> {
+  final flutterTts = FlutterTts();
+
+  void speak() async {
+    await flutterTts.speak(answerText);
+  }
+
+  void stopSpeak() async {
+    await flutterTts.stop();
+  }
+
   var _formFieldKey = GlobalKey<FormFieldState>();
   TextEditingController contextController = TextEditingController();
   TextEditingController questionController = TextEditingController();
@@ -19,7 +30,7 @@ class _IndexAndAskState extends State<IndexAndAsk> {
   String answerText = "";
   String questionQuery = "";
   bool progressHUD = false;
-
+  bool isEnabled = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,27 +58,31 @@ class _IndexAndAskState extends State<IndexAndAsk> {
                       children: <Widget>[
                         Text(
                           "Please Enter your paragraph",
-                          style: TextStyle(fontSize: 24),
+                          style: TextStyle(fontSize: 22),
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: TextFormField(
                             key: _formFieldKey,
                             decoration: InputDecoration(
+                              hoverColor: Colors.deepPurple,
+                              focusColor: Colors.deepPurple,
+                              fillColor: Colors.deepPurple,
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             controller: contextController,
+                            cursorHeight: 20,
                             maxLength: null,
                             maxLines: null,
                             keyboardType: TextInputType.multiline,
                             validator: (value) {
                               if (value.isEmpty) {
-                                return 'Please enter some Context to Index';
+                                return 'Please enter some Context to ask questions.';
                               }
                               return null;
                             },
@@ -88,7 +103,7 @@ class _IndexAndAskState extends State<IndexAndAsk> {
                           child: TextFormField(
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(15),
                               ),
                             ),
                             controller: questionController,
@@ -104,11 +119,18 @@ class _IndexAndAskState extends State<IndexAndAsk> {
                           ),
                         ),
                         ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.deepPurple)),
                           onPressed: () async {
+                            FocusScope.of(context)
+                                .requestFocus(new FocusNode());
+
                             if (_formFieldKey.currentState.validate()) {
                               questionContext = questionController.text;
                               questionQuery = contextController.text;
                               final snackBar = SnackBar(
+                                  duration: Duration(milliseconds: 1000),
                                   backgroundColor: Colors.deepPurple,
                                   content: Text(
                                       'Getting your answers... Please Wait...'));
@@ -120,10 +142,49 @@ class _IndexAndAskState extends State<IndexAndAsk> {
                               answerText = await requestBertModel(
                                   questionContext, questionQuery);
                             }
+
                             progressHUD = false;
+                            isEnabled = true;
+
                             setState(() {});
                           },
                           child: Text('Submit Context and question..'),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text("Speak Answer"),
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.speaker,
+                                      ),
+                                      onPressed: isEnabled ? speak : null,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text("   Stop "),
+                                    IconButton(
+                                      hoverColor: Colors.deepPurple,
+                                      icon: Icon(
+                                        Icons.stop_circle_rounded,
+                                        color: Colors.black,
+                                      ),
+                                      onPressed: stopSpeak,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -152,7 +213,7 @@ class _IndexAndAskState extends State<IndexAndAsk> {
                           height: 10,
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(15.0),
+                          padding: EdgeInsets.all(15.0),
                           child: Text(
                             answerText,
                             style: TextStyle(fontSize: 20),

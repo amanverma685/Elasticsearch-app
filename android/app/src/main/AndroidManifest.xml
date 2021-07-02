@@ -3,7 +3,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="elasticsearch_project"
+        android:label="Smart Snippet"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

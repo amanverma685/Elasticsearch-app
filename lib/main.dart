@@ -1,11 +1,10 @@
-// import 'package:elasticsearch_project/PDF_Screens/pdf_creator_screen.dart';
-
-import 'package:elasticsearch_project/Screens/Index_and_Ask.dart';
+import 'package:elasticsearch_project/Screens/ProvideContextAndAskBert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'AdobeInternTeam.dart';
 import 'FilePick_and_Upload.dart';
+import 'Screens/pdf_creator_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -110,13 +109,16 @@ class _MyHomePageState extends State<MyHomePage>
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Row(
                               children: <Widget>[
-                                Text(
-                                  'Smart',
-                                  style: TextStyle(
-                                      fontFamily: 'Lato',
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.10),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 20.0),
+                                  child: Text(
+                                    'Smart',
+                                    style: TextStyle(
+                                        fontFamily: 'Lato',
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.10),
+                                  ),
                                 ),
                                 DefaultTextStyle(
                                   style: TextStyle(
@@ -158,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage>
                                           borderRadius:
                                               BorderRadius.circular(20))),
                                 ),
-                                child: Text("Click Here"),
+                                child: Text("Find Answers"),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
@@ -185,7 +187,34 @@ class _MyHomePageState extends State<MyHomePage>
                                           borderRadius:
                                               BorderRadius.circular(20))),
                                 ),
-                                child: Text("Click Here "),
+                                child: Text("Generate PDF "),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PDFCreator(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.white),
+                                  foregroundColor:
+                                      MaterialStateProperty.all(Colors.black),
+                                  overlayColor: MaterialStateProperty.all(
+                                    Colors.deepPurple,
+                                  ),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20))),
+                                ),
+                                child: Text("Upload PDF "),
                                 onPressed: _incrementCounter,
                               ),
                             ),

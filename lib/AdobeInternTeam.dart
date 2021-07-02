@@ -40,6 +40,61 @@ class _AdobeInternTeamState extends State<AdobeInternTeam> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
+                              image: AssetImage('assets/dharna.jpeg'),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Intern",
+                              style: TextStyle(
+                                  fontFamily: 'Lobster',
+                                  color: Colors.white,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.08),
+                            ),
+                            Text(
+                              "Dharna Chandrakar",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: MediaQuery.of(context).size.width *
+                                      0.045),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: Padding(
+                padding: EdgeInsets.all(6.0),
+                child: Card(
+                  shadowColor: Colors.blue,
+                  elevation: 6,
+                  color: Colors.deepPurple,
+                  //Card with circular border
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
                               image: AssetImage('assets/sachin.jpeg'),
                               fit: BoxFit.fill,
                             ),
@@ -122,61 +177,6 @@ class _AdobeInternTeamState extends State<AdobeInternTeam> {
                                   color: Colors.white,
                                   fontSize:
                                       MediaQuery.of(context).size.width * 0.06),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 4,
-              child: Padding(
-                padding: EdgeInsets.all(6.0),
-                child: Card(
-                  shadowColor: Colors.blue,
-                  elevation: 6,
-                  color: Colors.deepPurple,
-                  //Card with circular border
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: AssetImage('assets/dharna.jpeg'),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Intern",
-                              style: TextStyle(
-                                  fontFamily: 'Lobster',
-                                  color: Colors.white,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.08),
-                            ),
-                            Text(
-                              "Dharna Chandrakar",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: MediaQuery.of(context).size.width *
-                                      0.045),
                             )
                           ],
                         ),

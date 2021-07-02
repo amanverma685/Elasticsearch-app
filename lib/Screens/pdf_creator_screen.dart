@@ -1,7 +1,8 @@
-import 'package:elasticsearch_project/PDF_Screens/report_pdf.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
+
+import 'PDFViewerScreen.dart';
 
 class PDFCreator extends StatefulWidget {
   @override
@@ -71,19 +72,21 @@ class _PDFCreatorState extends State<PDFCreator> {
                 ),
                 ElevatedButton(
                     style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all(Colors.red),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    side: BorderSide(color: Colors.red)))),
+                      foregroundColor: MaterialStateProperty.all(Colors.red),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.red)),
+                      ),
+                    ),
                     child: Text(
                       'Create PDF',
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
-                      reportView(context, pdfHeading, pdfText, pdfName);
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => PDFViewerFromAssets()));
                     }),
               ],
             ),
