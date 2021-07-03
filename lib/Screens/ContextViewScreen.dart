@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class ViewContext extends StatefulWidget {
   const ViewContext({Key key, @required this.text, this.text1})
@@ -11,10 +12,26 @@ class ViewContext extends StatefulWidget {
 }
 
 class _ViewContextState extends State<ViewContext> {
+  final flutterTts = FlutterTts();
+
+  void speak() async {
+    String text = widget.text;
+    await flutterTts.speak(text);
+  }
+
+  void stopSpeak() async {
+    await flutterTts.stop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        actions: [
+          IconButton(onPressed: speak, icon: Icon(Icons.speaker)),
+          IconButton(onPressed: stopSpeak, icon: Icon(Icons.stop))
+        ],
         backgroundColor: Colors.deepPurple,
         title: Text("Find Your Answer"),
       ),
