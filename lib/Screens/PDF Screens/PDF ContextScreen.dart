@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 
-import 'PDFViewerScreen.dart';
+import 'CreatePDFMethod.dart';
 
 class PDFCreator extends StatefulWidget {
   @override
@@ -63,31 +63,31 @@ class _PDFCreatorState extends State<PDFCreator> {
                         border: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
-                        labelText: 'Enter Pdf Name',
-                        hintText: 'PDF Name'),
+                        labelText: 'Enter Pdf Name with .pdf Extension',
+                        hintText: 'PDF Name with .pdf extension'),
                     onChanged: (value) {
                       pdfName = value;
                     },
                   ),
                 ),
                 ElevatedButton(
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.red),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.red)),
-                      ),
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.red),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.red)),
                     ),
-                    child: Text(
-                      'Create PDF',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => PDFViewerFromAssets()));
-                    }),
+                  ),
+                  child: Text(
+                    'Create PDF',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () async {
+                    createPDF(pdfHeading, pdfText, pdfName);
+                  },
+                ),
               ],
             ),
           ),
