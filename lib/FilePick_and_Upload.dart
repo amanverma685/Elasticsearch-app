@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_tts/flutter_tts.dart';
 
 import 'Screens/CarouselSlider.dart';
+import 'Screens/ContextViewScreen.dart';
 
 class FilePickerElasticSearch extends StatefulWidget {
   const FilePickerElasticSearch({Key key}) : super(key: key);
@@ -57,6 +58,7 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
   String questionContext = " ";
   String buttonData = "Upload PDF to Index on ElasticSearch";
   String answerData = " ";
+  String questionContext1 = "";
   void _clearCachedFiles() {
     FilePicker.platform.clearTemporaryFiles().then((result) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -160,7 +162,6 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
                                   icon: Icon(
                                     Icons.search,
                                     size: 25,
-                                    color: Colors.deepPurple,
                                   ),
                                   hintText: 'Enter your Query',
                                   labelText: 'Query',
@@ -208,6 +209,7 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
                                             json.decode(response.body);
                                         questionContext =
                                             jsonResponse['context1'];
+
                                         answerData = await requestBertModel(
                                             questionContext, inputQuery);
                                         print("This is the answer");
@@ -221,7 +223,6 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
                                         });
                                       }
                                     },
-                                    // It returns true if the form is valid, otherwise returns false
                                   ),
                                 ),
                               ),
@@ -255,6 +256,31 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
                                             ),
                                             onPressed: stopSpeak,
                                           ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Text("View Context"),
+                                          IconButton(
+                                              icon: Icon(
+                                                Icons.forward,
+                                              ),
+                                              onPressed: isEnabled
+                                                  ? () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ViewContext(
+                                                            text:
+                                                                questionContext,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  : null),
                                         ],
                                       ),
                                     ),
