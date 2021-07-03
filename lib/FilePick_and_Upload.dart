@@ -43,7 +43,7 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
   final flutterTts = FlutterTts();
 
   void speak() async {
-    await flutterTts.speak(questionContext);
+    await flutterTts.speak(answerData);
   }
 
   void stopSpeak() async {
