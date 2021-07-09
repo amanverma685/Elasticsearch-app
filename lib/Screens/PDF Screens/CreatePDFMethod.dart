@@ -9,9 +9,10 @@ Future<void> createPDF(
   PdfDocument document = PdfDocument();
   final page = document.pages.add();
   //Add the pages to the document
-  for (int i = 1; i <= 1; i++) {
-    document.pages.add();
-  }
+  // for (int i = 1; i <= 1; i++) {
+  //   document.pages.add();
+  // }
+
 
 //Create the header with specific bounds
   PdfPageTemplateElement header = PdfPageTemplateElement(
