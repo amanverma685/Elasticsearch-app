@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:translator/translator.dart';
 
 import 'AdobeBertModel.dart';
 import 'package:file_picker/file_picker.dart';
@@ -22,6 +23,8 @@ class FilePickerElasticSearch extends StatefulWidget {
 }
 
 class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
+  final translator = GoogleTranslator();
+
   void filePickerPickFile() async {
     buttonData = "Upload Done Press here to Upload PDF again";
     var result = await FilePicker.platform.pickFiles(
@@ -41,6 +44,7 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
     }
   }
 
+  String dropDownTitle = "Select Language";
   final flutterTts = FlutterTts();
 
   void speak() async {
@@ -49,6 +53,11 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
 
   void stopSpeak() async {
     await flutterTts.stop();
+  }
+
+  Future<String> translateIntoDesiredForm(String to) async {
+    var translation = await translator.translate(answerData, to: to);
+    return translation.text;
   }
 
   bool isEnabled = false;
@@ -287,10 +296,92 @@ class _FilePickerElasticSearchState extends State<FilePickerElasticSearch> {
                                   ],
                                 ),
                               ),
-                              Text(
-                                inputQuery,
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    inputQuery,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20),
+                                    child: DropdownButton<String>(
+                                      dropdownColor: Colors.deepPurple,
+                                      style: TextStyle(color: Colors.white),
+                                      iconEnabledColor: Colors.black,
+                                      icon: Icon(Icons.arrow_drop_down),
+                                      iconSize: 20,
+                                      underline: SizedBox(),
+                                      hint: Text(dropDownTitle),
+                                      items: <String>[
+                                        'German',
+                                        'Italian',
+                                        'Chinese',
+                                        'Spanish',
+                                        'English',
+                                        'Hindi',
+                                        'Dutch',
+                                        'Urdu',
+                                        'Russian'
+                                      ].map((String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: new Text(value),
+                                        );
+                                      }).toList(),
+                                      onChanged: (String value) async {
+                                        dropDownTitle = value;
+
+                                        if (value == "Spanish") {
+                                          answerData =
+                                              await translateIntoDesiredForm(
+                                                  'es');
+                                        } else if (value == "Italian") {
+                                          answerData =
+                                              await translateIntoDesiredForm(
+                                                  'it');
+                                        } else if (value == "Hindi") {
+                                          answerData =
+                                              await translateIntoDesiredForm(
+                                                  'hi');
+                                        } else if (value == "Dutch") {
+                                          answerData =
+                                              await translateIntoDesiredForm(
+                                                  'nl');
+                                        } else if (value == "German") {
+                                          answerData =
+                                              await translateIntoDesiredForm(
+                                                  'de');
+                                        } else if (value == "Chinese") {
+                                          translator.baseUrl =
+                                              "translate.google.cn";
+                                          var translated = await translator
+                                              .translate(answerData,
+                                                  to: 'zh-cn');
+                                          answerData = translated.text;
+                                        } else if (value == "English") {
+                                          answerData =
+                                              await translateIntoDesiredForm(
+                                                  'en');
+                                        } else if (value == "Russian") {
+                                          answerData =
+                                              await translateIntoDesiredForm(
+                                                  'ru');
+                                        } else if (value == "Urdu") {
+                                          answerData =
+                                              await translateIntoDesiredForm(
+                                                  'ur');
+                                        }
+
+                                        setState(() {});
+                                        print(value);
+                                      },
+                                    ),
+                                  )
+                                ],
                               ),
                               Divider(
                                 height: 3,
